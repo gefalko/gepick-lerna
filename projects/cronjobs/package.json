@@ -1,0 +1,29 @@
+{
+  "name": "cronjobs",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"ts-node --pretty -r tsconfig-paths/register' src/index.ts \"",
+    "build": "webpack",
+    "lint": "tsc && eslint . --config ../../.eslintrc --ext .tsx,.ts"
+  },
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "@types/cron": "^1.7.2",
+    "node-dev": "^4.0.0"
+  },
+  "dependencies": {
+    "@gepick/database": "^1.0.0",
+    "@gepick/predictions-calculator": "^1.0.0",
+    "@types/commander": "^2.12.2",
+    "antd": "^4.6.1",
+    "cron": "^1.8.2",
+    "history": "^5.0.0",
+    "moment": "^2.27.0",
+    "mongodb-client-encryption": "^1.1.0",
+    "object-sizeof": "^1.6.1",
+    "react": "^16.13.1",
+    "react-ga": "^3.1.2",
+    "react-joyride": "^2.3.0",
+    "unique-names-generator": "^4.4.0"
+  }
+}

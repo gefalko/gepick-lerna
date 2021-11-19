@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "containers/*": ["./containers/*"],
+      "components/*": ["./components/*"],
+      "hooks/*": ["./hooks/*"],
+      "routes/*": ["./routes/*"],
+      "modals/*": ["./modals/*"],
+      "utils/*": ["./utils/*"]
+    },
+    "typeRoots": ["custom_types"]
+  },
+  "exclude": ["build", "node_modules"]
+}
+

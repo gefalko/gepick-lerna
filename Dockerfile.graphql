@@ -1,0 +1,16 @@
+FROM node:12
+
+WORKDIR /app
+
+COPY packages packages
+COPY projects/back/graphql projects/back/graphql
+
+COPY package.json package.json
+COPY lerna.json lerna.json
+COPY .eslintrc .eslintrc
+COPY .prettierrc .prettierrc
+COPY tsconfig.json tsconfig.json
+COPY package-lock.json package-lock.json
+
+RUN yarn install
+RUN yarn build:back-graphql

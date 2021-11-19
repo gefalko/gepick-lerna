@@ -1,0 +1,18 @@
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   D: true,
+0 silly argv   dev: true,
+0 silly argv   scope: 'back-graphql',
+0 silly argv   globs: [],
+0 silly argv   lernaVersion: '3.20.2',
+0 silly argv   '$0': '/Users/gefalko/gepick/gepick-lerna/node_modules/.bin/lerna',
+0 silly argv   pkg: '@gepick-database'
+0 silly argv }
+1 notice cli v3.20.2
+2 verbose rootPath /Users/gefalko/gepick/gepick-lerna
+3 error Error: Invalid tag name "@gepick-database": Tags may not have any characters that encodeURIComponent encodes.
+3 error     at invalidTagName (/Users/gefalko/gepick/gepick-lerna/node_modules/npm-package-arg/npa.js:91:15)
+3 error     at fromRegistry (/Users/gefalko/gepick/gepick-lerna/node_modules/npm-package-arg/npa.js:296:13)
+3 error     at resolve (/Users/gefalko/gepick/gepick-lerna/node_modules/npm-package-arg/npa.js:81:12)
+3 error     at npa (/Users/gefalko/gepick/gepick-lerna/node_modules/npm-package-arg/npa.js:52:10)
+3 error     at AddCommand.initialize (/Users/gefalko/gepick/gepick-lerna/node_modules/@lerna/add/index.js:39:17)

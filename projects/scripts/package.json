@@ -1,0 +1,23 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack",
+    "lint": "tsc && eslint . --config ../../.eslintrc --ext .tsx,.ts"
+  },
+  "main": "./dist/index.js",
+  "dependencies": {
+    "@gepick/database": "^1.0.0",
+    "@gepick/predictions-calculator": "^1.0.0",
+    "@types/commander": "^2.12.2",
+    "history": "^5.0.0",
+    "object-sizeof": "^1.6.1",
+    "react": "^16.13.1",
+    "react-ga": "^3.1.2",
+    "react-joyride": "^2.3.0",
+    "unique-names-generator": "^4.4.0"
+  },
+  "_moduleAliases": {
+    "utils": "build/utils"
+  }
+}

@@ -1,0 +1,6 @@
+export enum PickStatusEnum {
+  CANCELED = 'CANCELED',
+  CORRECT = 'CORRECT',
+  NOT_CORRECT = 'NOT_CORRECT',
+  PENDING = 'PENDING',
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@gepick/config",
+  "version": "1.0.0",
+  "dependencies": {
+    "object-sizeof": "^1.6.1",
+    "react-joyride": "^2.3.0",
+    "unique-names-generator": "^4.4.0"
+  }
+}

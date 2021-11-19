@@ -1,0 +1,43 @@
+{
+  "name": "gepick-lerna",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:back-graphql:prod": "lerna run start:prod --scope back-graphql --stream",
+    "start:front-web": "lerna run start --scope front-web --stream",
+    "build:front-web": "lerna run build --scope front-web --stream",
+    "build:back-graphql": "lerna run build --scope back-graphql --stream",
+    "build:cronjobs": "lerna run build --scope cronjobs --stream",
+    "build:scripts": "lerna run build --scope scripts --stream",
+    "lint:front-web": "lerna run lint --scope front-web --stream",
+    "lint:back-graphql": "lerna run lint --scope back-graphql --stream",
+    "lint:cronjobs": "lerna run lint --scope cronjobs --stream",
+    "lint:scripts": "lerna run lint --scope scripts",
+    "bootstrap": "lerna bootstrap"
+  },
+  "dependencies": {
+    "lerna": "^3.20.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1"
+  },
+  "workspaces": [
+    "projects/**",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:cronjobs && yarn lint:front-web && yarn lint:back-graphql && yarn lint:scripts"
+    }
+  }
+}

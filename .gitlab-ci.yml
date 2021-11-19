@@ -1,0 +1,78 @@
+stages:
+  - build
+  - deploy
+build:
+  only:
+    - master
+  tags:
+    - 'nodejs'
+  stage: build
+  before_script:
+    - chmod +x ./setup_staging_env.sh
+    - ./setup_staging_env.sh
+  script:
+    - echo $SSHPASS
+    - yarn install
+    - yarn bootstrap
+    - yarn build:front-web
+    - yarn build:back-graphql
+    - yarn build:scripts
+    - yarn build:cronjobs  
+  artifacts:
+    paths:
+      - projects/front/web/dist
+      - projects/back/graphql/dist
+      - projects/cronjobs/dist
+      - projects/scripts/dist
+deploy-staging:
+  stage: deploy
+  only:
+    - master
+  tags:
+    - 'sshpass'
+  script:
+    # web
+    - export SSHPASS=$SSHPASS
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/staging/web/staging.gepick.com'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/staging/web/staging.gepick.com'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/front/web/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/staging/web/staging.gepick.com/
+    # graphql
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/staging/graphql'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/staging/graphql'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/back/graphql/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/staging/graphql/
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'forever restart /home/system/gepick3/staging/graphql/server.js'
+    # cronjobs
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/staging/cronjobs'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/staging/cronjobs'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/cronjobs/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/staging/cronjobs/
+    # scripts
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/staging/scripts'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/staging/scripts'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/scripts/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/staging/scripts/
+deploy-production:
+  stage: deploy
+  when: manual
+  tags:
+    - 'sshpass'
+  only:
+    - master
+  script:
+    # web
+    - export SSHPASS=$SSHPASS
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/production/web/gepick.com'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/production/web/gepick.com'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/front/web/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/production/web/gepick.com/
+    # graphql
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/production/graphql'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/production/graphql'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/back/graphql/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/production/graphql/
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'forever restart /home/system/gepick3/production/graphql/server.js'
+    # cronjobs
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/production/cronjobs'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/production/cronjobs'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/cronjobs/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/production/cronjobs/
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'forever restart /home/system/gepick3/production/cronjobs/index.js'
+    # scripts
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'rm -rf /home/system/gepick3/production/scripts'
+    - sshpass -e ssh -o stricthostkeychecking=no system@bb864.l.dedikuoti.lt 'mkdir /home/system/gepick3/production/scripts'
+    - sshpass -e scp -r -o stricthostkeychecking=no  projects/scripts/dist/* system@bb864.l.dedikuoti.lt:/home/system/gepick3/production/scripts/

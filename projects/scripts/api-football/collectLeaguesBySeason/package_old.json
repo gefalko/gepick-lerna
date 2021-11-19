@@ -1,0 +1,35 @@
+{
+  "name": "scripts-collect-api-football-leagues",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"ts-node --pretty -r tsconfig-paths/register' src/index.ts -s 2019\"",
+    "build": "tsc",
+    "lint": "tsc && eslint . --config ../../../../.eslintrc --ext .tsx,.ts"
+  },
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "husky": "^4.2.5",
+    "module-alias": "^2.2.2",
+    "mongoose": "^5.9.12",
+    "node-dev": "^4.0.0",
+    "source-map-loader": "^0.2.4",
+    "source-map-support": "^0.5.19",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsc-watch": "^4.2.3",
+    "tsconfig-paths": "^3.9.0",
+    "typegoose": "^5.9.1"
+  },
+  "dependencies": {
+    "@gepick/database": "^1.0.0",
+    "antd": "^4.6.1",
+    "commander": "^5.0.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.27.0",
+    "mongodb-client-encryption": "^1.1.0",
+    "nodemon": "^2.0.3"
+  },
+  "_moduleAliases": {
+    "utils": "build/utils"
+  }
+}

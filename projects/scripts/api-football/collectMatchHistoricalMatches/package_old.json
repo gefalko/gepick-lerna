@@ -1,0 +1,27 @@
+{
+  "name": "scripts-api-football-collect-match-historical-matches",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsc-watch --onSuccess \"ts-node --pretty -r tsconfig-paths/register' src/index.ts --matchId 5f44c56235e617f3a31fad32\"",
+    "build": "tsc",
+    "lint": "tsc && eslint . --config ../../../../.eslintrc --ext .tsx,.ts"
+  },
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "@gepick/database": "^1.0.0",
+    "husky": "^4.2.5",
+    "node-dev": "^4.0.0"
+  },
+  "dependencies": {
+    "@types/commander": "^2.12.2",
+    "antd": "^4.6.1",
+    "commander": "^5.1.0",
+    "history": "^5.0.0",
+    "moment": "^2.27.0",
+    "mongodb-client-encryption": "^1.1.0",
+    "react-ga": "^3.1.2"
+  },
+  "_moduleAliases": {
+    "utils": "build/utils"
+  }
+}

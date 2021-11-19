@@ -1,0 +1,15 @@
+export const bannedCountriesList = [
+  'New Caledonia',
+  'World',
+  'Saudi Arabia',
+  'Saudi-Arabia',
+  'Kosovo',
+  'Liechtenstein',
+  'Bosnia and Herzegovina',
+  'Korea Republic',
+  'Czech Republic',
+  'Holland',
+  'Costa Rica',
+  'Northern Ireland',
+  'Martinique',
+]
